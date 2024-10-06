@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router'
 import * as React from 'react'
 import { Text } from 'react-native'
 
-const TabsLayout = () => {
+function HabitLayout() {
   return (
     <>
       <Tabs
@@ -14,11 +14,21 @@ const TabsLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="home"
+          name="list"
           options={{
-            title: 'Home',
+            title: 'All',
+            headerLeft: () => <Text>Home</Text>,
             tabBarIcon: ({ color: string, focused: boolean, size: number }) => (
-              <Text>Home</Text>
+              <Text>All</Text>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: 'Create',
+            tabBarIcon: ({ color: string, focused: boolean, size: number }) => (
+              <Text>Create</Text>
             ),
           }}
         />
@@ -27,4 +37,4 @@ const TabsLayout = () => {
   )
 }
 
-export default TabsLayout
+export default HabitLayout
