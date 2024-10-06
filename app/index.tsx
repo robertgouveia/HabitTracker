@@ -1,83 +1,104 @@
-import { Link, router, Stack } from 'expo-router'
+import { Link } from 'expo-router'
 import * as React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { StyleSheet, Text, View } from 'react-native'
+import Header from '../components/Header'
+import SignInButton from '../components/SignInButton'
 import { colors } from '../constants/globals'
+import images from '../constants/images'
 
 export default function App() {
   return (
     <>
-      <Stack.Screen
-        options={{
-          headerTitle: () => <Text>Habit Tracker</Text>,
-          headerStyle: {
-            backgroundColor: colors.primary,
-          },
-        }}
-      />
-      <SafeAreaView style={styles.container}>
+      <Header title="Habit Tracker" />
+      <View style={styles.container}>
         <View>
-          <Text>Login (Landing Page)</Text>
+          <Text style={styles.title}>Welcome</Text>
+          <Text style={styles.subtitle}>Log in to track your habits!</Text>
         </View>
-        <View>
-          <View style={styles.signInBox}>
-            <TouchableOpacity
-              onPress={() => router.replace('/(tabs)/home')}
-              style={styles.email}
-            >
-              <Text style={styles.ctaText}>Email</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => router.replace('/(tabs)/home')}
-              style={styles.google}
-            >
-              <Text style={styles.ctaText}>Google</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.signUpArea}>
-            <Text>Not a user?</Text>
-            <Link href={'/home'}>
-              <Text>Sign up</Text>
-            </Link>
-          </View>
+        <View style={styles.buttons}>
+          <SignInButton
+            options={{
+              backgroundColor: 'white',
+              image: images.Google,
+              title: 'Continue with Google',
+              endpoint: '/(auth)/login',
+              textColor: 'gray',
+              width: 30,
+            }}
+          />
+          <SignInButton
+            options={{
+              backgroundColor: '#1877F2',
+              image: images.Facebook,
+              title: 'Continue with Facebook',
+              endpoint: '/(auth)/login',
+              textColor: 'white',
+              width: 20,
+            }}
+          />
+          <SignInButton
+            options={{
+              backgroundColor: 'black',
+              image: images.Apple,
+              title: 'Continue with Apple',
+              endpoint: '/(auth)/login',
+              textColor: 'white',
+              width: 20,
+            }}
+          />
         </View>
-      </SafeAreaView>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            gap: 6,
+          }}
+        >
+          <Text>New to HabitTracker? </Text>
+          <Link href={'/(auth)/signup'}>
+            <Text style={{ color: colors.primary, fontWeight: '600' }}>
+              Join now
+            </Text>
+          </Link>
+        </View>
+        <View style={{ position: 'absolute', bottom: 50 }}>
+          <Text style={{ fontWeight: '300', color: 'darkgray' }}>
+            Alpha: 0.0.1 -{' '}
+            <Text
+              style={{
+                textDecorationLine: 'underline',
+              }}
+            >
+              ©Websitech
+            </Text>
+          </Text>
+        </View>
+      </View>
     </>
   )
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 36,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'gray',
+  },
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  signInBox: {
-    paddingTop: 56,
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    gap: 16,
-  },
-  google: {
-    width: 300,
-    backgroundColor: 'red',
-    padding: 12,
-  },
-  email: {
-    width: 300,
-    backgroundColor: '#000',
-    padding: 12,
-  },
-  ctaText: {
-    textAlign: 'center',
-    color: 'white',
-  },
-  signUpArea: {
-    flexDirection: 'row',
-    padding: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 6,
+    gap: 48,
+    marginTop: -128,
+  },
+  buttons: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 16,
   },
 })

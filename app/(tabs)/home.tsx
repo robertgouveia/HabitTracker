@@ -11,7 +11,7 @@ const Home = () => {
           headerRight: () => {
             return (
               <TouchableOpacity
-                onPress={() => router.replace('/')}
+                onPress={() => router.navigate('/')}
                 style={{
                   marginHorizontal: 12,
                   padding: 6,
